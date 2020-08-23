@@ -1,0 +1,41 @@
+<main class="container">
+    <div class="card mb-5">
+        <div class="card-header">Users</div>
+        <div class="card-block p-0">
+            <table class="table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">settlementId</th>
+                        <th scope="col">Created at</th>
+                        <th scope="col">Delete</th>
+                        <th scope="col">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.name}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.settlementId}}</td>
+                        <td>{{user.role.role}}</td>
+                        <td><button (click)="deleteUser(user.id)" class="btn btn-warning">Delete</button></td>
+                        <td><button (click)="getUserById(user.id)" class="btn btn-dark">Update</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div *ngIf="deleteError">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 offset-sm-2">
+                    <div class="alert alert-warning text-center">No permisson error</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

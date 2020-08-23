@@ -1,0 +1,14 @@
+<body class="text-center">
+    <form class="form-signin mainbody container justify-content-md-center">
+        <div class="checkbox mb-5"></div>
+        <img class="mb-4" src="../assets/asseco2.png" alt="" width="300" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="inputUsername" class="sr-only">Email address</label>
+        <input [(ngModel)]="username" name="userInput" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input [(ngModel)]="password" name="passwordInput" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox mb-3"></div>
+        <button (click)="login()" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <div class="alert alert-warning" *ngIf="invalidLogin">{{errorMessage}}</div>
+    </form>
+</body>
