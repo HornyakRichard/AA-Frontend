@@ -4,6 +4,7 @@ export class User {
         public username: string,
         public name: string,
         public active: boolean,
-        public createdAt: Date
+        public createdAt: Date,
+        public settlementId: number
     ){}
 }

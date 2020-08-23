@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
   refreshUsers() {
     this.userService.getUsers().subscribe(data => {
       this.users = data
+    }, () => {
+      this.router.navigate(['error'])
     })
   }
 

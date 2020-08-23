@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
 
 export const TOKEN = 'token'
 export const USERNAME = 'username'
@@ -11,7 +12,9 @@ export const USERNAME = 'username'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService) { }
 
   authUser(username, password) {
     return this.http.post<any>(
@@ -22,23 +25,23 @@ export class AuthService {
         map(
           data => {
             sessionStorage.setItem(USERNAME, username)
-            sessionStorage.setItem(TOKEN, `Bearer ${data.token}`)
+            this.cookieService.set(TOKEN, `Bearer ${data.token}`)
           }
       )
     )
   }
 
   isUserLoggedIn() {
-    return sessionStorage.getItem(TOKEN) != null;
+    return this.cookieService.get(TOKEN) != null
   }
 
   logout() {
-    sessionStorage.removeItem(TOKEN);
-    sessionStorage.removeItem(USERNAME);
+    this.cookieService.delete(TOKEN)
+    sessionStorage.removeItem(USERNAME)
   }
   
   getAuthenticatedToken() {
-    return sessionStorage.getItem(TOKEN)
+    return this.cookieService.get(TOKEN)
   }
 
 
